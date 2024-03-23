@@ -1,0 +1,21 @@
+server:
+  port: 9090 # Port on which the service will run
+
+spring:
+  application:
+    name: service-consumer # Name of the service
+
+  # Configuring the service to register itself with the Consul server
+  cloud:
+    consul:
+      # The host and port of the Consul server
+      host: localhost
+      port: 8500
+      # The service registration configuration
+      discovery:
+        register: false # Register the service with the Consul server
+        instance-id: ${spring.application.name}-01 # The instance ID of the service 注册实例id（必须唯一）
+        service-name: ${spring.application.name} # The name of the service 服务名称
+        port: ${server.port} # The port on which the service is running 服务端口
+        prefer-ip-address: true # Use the IP address of the service instead of the hostname 是否使用服务的IP地址注册而不是主机名
+        ip-address: ${spring.cloud.client.ip-address} # The IP address of the service 服务请求IP
