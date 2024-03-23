@@ -1,0 +1,4 @@
+# run 
+```
+consul agent -dev
+```
